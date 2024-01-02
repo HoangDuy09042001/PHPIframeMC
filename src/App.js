@@ -88,7 +88,7 @@ function App() {
               width='300'
               autoPlay
               style={{
-                position: 'absolute', top: '100px', left: '475px', borderRadius: '10px', transform: 'scale(1)',
+                position: 'absolute', top: '110px', left: '475px', borderRadius: '10px', transform: 'scale(1)',
                 transition: 'transform 1s ease-in-out',
               }}
               ref={mcVideoRef}
