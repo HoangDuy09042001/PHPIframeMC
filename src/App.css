@@ -1,4 +1,8 @@
-.default-image {
-  background-image: url('../public/background.png');
-  width: 500px;
+
+.image-default {
+  
+  background-image: url('../public/default_image.png');
+  width: 1152px; /* Giả sử bạn muốn làm phép tính kích thước ở đây */
+  height: 648px;
+  background-size: cover;
 }

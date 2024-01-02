@@ -6,6 +6,7 @@ function App() {
   const [showMcVideo, setShowMcVideo] = useState(false);
   const backgroundVideoRef = useRef(null);
   const [pause, setPause] = useState(false);
+  const [imgdefault, setImgDefault] = useState(true);
   const [pauseBg, setPauseBg] = useState(false);
   const [videoId, setVideoId] = useState(null);
   const mcVideoRef = useRef(null);
@@ -27,8 +28,9 @@ function App() {
   }, []);
   useEffect(() => {
     const handleUserInteraction = () => {
+      setImgDefault(false)
       if (showMcVideo) {
-  
+
         if (!pause) {
           mcVideoRef.current.pause();
         } else if (pause) {
@@ -38,7 +40,7 @@ function App() {
       }
       if (!showMcVideo) {
         if (!pauseBg) {
-         
+
           backgroundVideoRef.current.play();
         } else if (pauseBg) {
           backgroundVideoRef.current.pause();
@@ -58,35 +60,33 @@ function App() {
 
   return (
     <div className="App" style={{ position: 'relative', width: 'fit-content', margin: 'auto' }}>
-      <div className="container">
-        <video
-          className="background"
-          preload="auto"
-          width='calc(1920/2)'
-          // controls={false}
-          autoPlay
-          onTimeUpdate={handleBackgroundTimeUpdate}
-          ref={backgroundVideoRef}
-          style={{ marginTop: '10px' }}
-          src="background.mp4"
-        ></video>
-
-        {showMcVideo && (
+      {imgdefault ? <div className='image-default'></div> :<></>}
+        <div className="container" style={{display: imgdefault?'none':'block'}}>
           <video
-            className="mc"
-            width='380'
-            // controls={false}
+            className="background"
+            preload="auto"
+            width='calc(1920/2)'
             autoPlay
-            style={{
-              position: 'absolute', top: '150px', left: '620px', borderRadius: '10px', transform: 'scale(1)',
-              transition: 'transform 1s ease-in-out',
-            }}
-            ref={mcVideoRef}
-            // src={base64Video?`data:video/mp4;base64,${base64Video}`:'mc.mp4'}
-            src={videoId?`https://work247.vn/dowload/video_new/new_${videoId}/video_${videoId}.mp4`:'mc.mp4'}
+            onTimeUpdate={handleBackgroundTimeUpdate}
+            ref={backgroundVideoRef}
+            src="background.mp4"
           ></video>
-        )}
-      </div>
+
+          {showMcVideo && (
+            <video
+              className="mc"
+              width='380'
+              autoPlay
+              style={{
+                position: 'absolute', top: '150px', left: '620px', borderRadius: '10px', transform: 'scale(1)',
+                transition: 'transform 1s ease-in-out',
+              }}
+              ref={mcVideoRef}
+              src={videoId ? `https://work247.vn/dowload/video_new/new_${videoId}/video_${videoId}.mp4` : 'mc.mp4'}
+            ></video>
+          )}
+        </div>
+
 
     </div>
   );
