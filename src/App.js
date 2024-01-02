@@ -7,9 +7,8 @@ function App() {
   const backgroundVideoRef = useRef(null);
   const [pause, setPause] = useState(false);
   const [pauseBg, setPauseBg] = useState(false);
-  const [videoId, setVideoId] = useState('');
+  const [videoId, setVideoId] = useState(null);
   const mcVideoRef = useRef(null);
-  const [base64Video, setBase64Video] = useState(null);
   const handleBackgroundTimeUpdate = () => {
     const currentTime = backgroundVideoRef.current.currentTime;
     // Show the mc video after 6 seconds
@@ -26,27 +25,6 @@ function App() {
       setVideoId(idFromUrl);
     }
   }, []);
-  useEffect(() => {
-    const fetchVideoData = async () => {
-      try {
-        const response = await fetch('http://127.0.0.1:6123/get_video_base64', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ videoId }),
-        });
-
-        const data = await response.json();
-        setBase64Video(data.base64Video);
-
-      } catch (error) {
-        console.error('Error fetching video data:', error);
-      }
-    };
-
-    fetchVideoData();
-  }, [videoId]);
   useEffect(() => {
     const handleUserInteraction = () => {
       if (showMcVideo) {
@@ -80,7 +58,6 @@ function App() {
 
   return (
     <div className="App" style={{ position: 'relative', width: 'fit-content', margin: 'auto' }}>
-      <p>{videoId}</p>
       <div className="container">
         <video
           className="background"
@@ -105,7 +82,8 @@ function App() {
               transition: 'transform 1s ease-in-out',
             }}
             ref={mcVideoRef}
-            src={base64Video?`data:video/mp4;base64,${base64Video}`:'mc.mp4'}
+            // src={base64Video?`data:video/mp4;base64,${base64Video}`:'mc.mp4'}
+            src={videoId?`https://work247.vn/dowload/video_new/new_${videoId}/video_${videoId}.mp4`:'mc.mp4'}
           ></video>
         )}
       </div>
