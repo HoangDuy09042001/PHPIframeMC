@@ -75,7 +75,7 @@ function App() {
           <video
             className="background"
             preload="auto"
-            width='calc(1920/2)'
+            height={500}
             autoPlay
             onTimeUpdate={handleBackgroundTimeUpdate}
             ref={backgroundVideoRef}
@@ -85,10 +85,10 @@ function App() {
           {showMcVideo && (
             <video
               className="mc"
-              width='380'
+              width='300'
               autoPlay
               style={{
-                position: 'absolute', top: '150px', left: '620px', borderRadius: '10px', transform: 'scale(1)',
+                position: 'absolute', top: '100px', left: '475px', borderRadius: '10px', transform: 'scale(1)',
                 transition: 'transform 1s ease-in-out',
               }}
               ref={mcVideoRef}
