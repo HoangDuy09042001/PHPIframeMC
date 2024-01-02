@@ -5,6 +5,7 @@ import './App.css';
 function App() {
   const [showMcVideo, setShowMcVideo] = useState(false);
   const backgroundVideoRef = useRef(null);
+  const audioRef = useRef(null);
   const [pause, setPause] = useState(false);
   const [imgdefault, setImgDefault] = useState(true);
   const [pauseBg, setPauseBg] = useState(false);
@@ -33,8 +34,12 @@ function App() {
 
         if (!pause) {
           mcVideoRef.current.pause();
+          audioRef.current.pause();
+          audioRef.current.volume = 0.3
         } else if (pause) {
           mcVideoRef.current.play();
+          audioRef.current.play();
+          audioRef.current.volume = 0.3
         }
         setPause(!pause)
       }
@@ -42,8 +47,12 @@ function App() {
         if (!pauseBg) {
 
           backgroundVideoRef.current.play();
+          audioRef.current.play();
+          audioRef.current.volume = 0.3
         } else if (pauseBg) {
           backgroundVideoRef.current.pause();
+          audioRef.current.pause();
+          audioRef.current.volume = 0.3
         }
         setPauseBg(!pauseBg)
       }
@@ -61,6 +70,7 @@ function App() {
   return (
     <div className="App" style={{ position: 'relative', width: 'fit-content', margin: 'auto' }}>
       {imgdefault ? <div className='image-default'></div> :<></>}
+      <audio ref={audioRef} src="background_music.mp3" />
         <div className="container" style={{display: imgdefault?'none':'block'}}>
           <video
             className="background"
