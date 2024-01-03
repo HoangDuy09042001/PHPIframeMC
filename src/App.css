@@ -1,8 +1,26 @@
-
+.App {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
 .image-default {
   
   background-image: url('../public/default_image.png');
-  width: 888.8px; 
-  height: 500px;
+  width: 1920px; 
+  height: 1080px;
   background-size: cover;
+}
+.mc {
+  position: absolute;
+  border-radius: 10px;
+  transform: scale(1);
+  transition: transform 1s ease-in-out;
+}
+.get_position {
+  position: absolute;
+  font-size: 30px;
+  color: blue;
+  top: 500px;
+  left: 500px;
+  z-index: 1;
 }
