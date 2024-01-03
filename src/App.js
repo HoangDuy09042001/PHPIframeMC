@@ -42,11 +42,11 @@ function App() {
         if (!pause) {
           mcVideoRef.current.pause();
           audioRef.current.pause();
-          audioRef.current.volume = 0.3
+          audioRef.current.volume = 0.2
         } else if (pause) {
           mcVideoRef.current.play();
           audioRef.current.play();
-          audioRef.current.volume = 0.3
+          audioRef.current.volume = 0.2
         }
         setPause(!pause)
       }
@@ -55,11 +55,11 @@ function App() {
 
           backgroundVideoRef.current.play();
           audioRef.current.play();
-          audioRef.current.volume = 0.3
+          audioRef.current.volume = 0.2
         } else if (pauseBg) {
           backgroundVideoRef.current.pause();
           audioRef.current.pause();
-          audioRef.current.volume = 0.3
+          audioRef.current.volume = 0.2
         }
         setPauseBg(!pauseBg)
       }
