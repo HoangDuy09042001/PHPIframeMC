@@ -35,20 +35,29 @@ function App() {
     }
   }, []);
   useEffect(() => {
+    const currentMcVideoRef = mcVideoRef.current;
+    const handleVideoEnded = (eref) => {
+      // Dừng cả video và audio khi video kết thúc
+      eref.pause();
+      audioRef.current.pause();
+      audioRef.current.volume = 0.1;
+    };
     const handleUserInteraction = () => {
       setImgDefault(false)
       if (showMcVideo) {
-
+      
+        // Thêm sự kiện "ended" cho video
+        currentMcVideoRef.addEventListener('ended', () => handleVideoEnded(mcVideoRef.current));
         if (!pause) {
-          mcVideoRef.current.pause();
+          currentMcVideoRef.pause();
           audioRef.current.pause();
           audioRef.current.volume = 0.1
         } else if (pause) {
-          mcVideoRef.current.play();
+          currentMcVideoRef.play();
           audioRef.current.play();
           audioRef.current.volume = 0.1
         }
-        setPause(!pause)
+        setPause(!pause) 
       }
       if (!showMcVideo) {
         if (!pauseBg) {
@@ -69,6 +78,7 @@ function App() {
 
     return () => {
       document.removeEventListener('click', handleUserInteraction);
+      currentMcVideoRef.removeEventListener('ended', handleVideoEnded);
     };
   }, [pause, pauseBg, showMcVideo]);
 
