@@ -100,8 +100,7 @@ function App() {
           <div style={{ borderRadius: '10', overflow: 'hidden', width: 600 * scale + 'px', height: 600 * scale + 'px' }}>
             <video
               className="mc"
-              // autoPlay
-              onClick={() => {mcVideoRef.current.play()}}
+              autoPlay
               width={600 * scale}
               style={{ top: scale * (560 - 600 / 2) + 'px', left: scale * (1350 - 600 / 2) + 'px' }}
               ref={mcVideoRef}
