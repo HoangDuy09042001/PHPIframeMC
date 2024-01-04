@@ -74,8 +74,6 @@ function App() {
     <div className="App" style={{ position: 'relative', width: 'fit-content', margin: 'auto' }}>
       {imgdefault ? <div onClick={() => {
         setImgDefault(false)
-        const backgroundVideoRefButton = backgroundVideoRef.current
-        backgroundVideoRefButton.click()
       }} className='image-default' style={{ width: width + 'px', height: height + 'px' }}></div> : <></>}
 
       <audio ref={audioRef} src="background_music.mp3" />
