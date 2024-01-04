@@ -102,7 +102,6 @@ function App() {
               style={{ top: scale * (560 - 600 / 2) + 'px', left: scale * (1350 - 600 / 2) + 'px' }}
               ref={mcVideoRef}
               src={videoId ? `https://work247.vn/dowload/video_new/new_${videoId}/video_${videoId}.mp4` : 'mc.mp4'}
-              muted
             ></video>
           </div>
         )}
