@@ -57,12 +57,11 @@ function App() {
         setPauseBg(!pauseBg)
       }
     };
-    const backgroundVideoRefButton = backgroundVideoRef.current
-    backgroundVideoRefButton.addEventListener('click', handleUserInteraction);
+    document.addEventListener('click', handleUserInteraction);
 
 
     return () => {
-      backgroundVideoRefButton.removeEventListener('click', handleUserInteraction);
+      document.removeEventListener('click', handleUserInteraction);
     };
   }, [pause, pauseBg, showMcVideo]);
 
