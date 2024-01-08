@@ -94,16 +94,14 @@ function App() {
         ></video>
 
         {showMcVideo && (
-          <div style={{ borderRadius: '10', overflow: 'hidden', width: 600 * scale + 'px', height: 600 * scale + 'px' }}>
             <video
               className="mc"
               autoPlay
               width={600 * scale}
-              style={{ top: scale * (560 - 600 / 2) + 'px', left: scale * (1350 - 600 / 2) + 'px' }}
+              style={{ top: scale * (560 - 600 / 2) + 'px', left: scale * (1350 - 600 / 2) + 'px', borderRadius: '10' }}
               ref={mcVideoRef}
               src={videoId ? `https://work247.vn/dowload/video_new/new_${videoId}/video_${videoId}.mp4` : 'mc.mp4'}
             ></video>
-          </div>
         )}
       </div>
 
