@@ -10,7 +10,7 @@ function App() {
   const [imgdefault, setImgDefault] = useState(true);
   const [scale, setScale] = useState(1)
   const [width, setWidth] = useState(1920)
-  // const [height, setHeight] = useState(1080)
+  const [height, setHeight] = useState(1080)
   const [pauseBg, setPauseBg] = useState(false);
   const [videoId, setVideoId] = useState(null);
   const mcVideoRef = useRef(null);
@@ -27,7 +27,6 @@ function App() {
     if (idWidth) {
       setWidth(parseFloat(idWidth))
     }
-    
   }, []);
   useEffect(() => {
     const handleUserInteraction = () => {
@@ -68,25 +67,30 @@ function App() {
 
   useEffect(() => {
     setScale(width / 1920)
-    // setHeight(width / 1920 * 1080)
+    setHeight(width / 1920 * 1080)
   }, [imgdefault, width]);
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setImgDefault(false);
-      backgroundVideoRef.current.play()
-    }, 1000);
 
-    return () => clearTimeout(timeoutId);
-  }, []);
   return (
     <div className="App" style={{ position: 'relative', width: 'fit-content', margin: 'auto' }}>
+      {imgdefault ?
+        <div className='image-default' style={{ position: 'relative', width: width + 'px', height: height + 'px' }}>
+          <div className='button-video' style={{ width: width + 'px', height: height + 'px', position: "absolute", top: 0 + 'px', backgroundColor: "rgba(0,0,0,0.2)", display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            onClick={() => {
+              setImgDefault(false)
+            }}
+          >
+
+            <div style={{ backgroundImage: "url('watchnow.png')", width: 450*scale + "px", height: 167*scale + "px", backgroundSize: 'cover' }}></div>
+          </div>
+        </div>
+        : <></>}
+
       <audio ref={audioRef} src="background_music.mp3" />
-      <div className="container">
+      <div className="container" style={{ display: imgdefault ? 'none' : 'block' }}>
         <video
           className="background"
           preload="auto"
           autoPlay
-          muted
           onTimeUpdate={() => {
             const currentTime = backgroundVideoRef.current.currentTime;
             if (currentTime >= 6 && !showMcVideo) {
@@ -99,14 +103,14 @@ function App() {
         ></video>
 
         {showMcVideo && (
-            <video
-              className="mc"
-              autoPlay
-              width={600 * scale}
-              style={{ top: scale * (560 - 600 / 2) + 'px', left: scale * (1350 - 600 / 2) + 'px', borderRadius: '10' }}
-              ref={mcVideoRef}
-              src={videoId ? `https://work247.vn/dowload/video_new/new_${videoId}/video_${videoId}.mp4` : 'mc.mp4'}
-            ></video>
+          <video
+            className="mc"
+            autoPlay
+            width={600 * scale}
+            style={{ top: scale * (560 - 600 / 2) + 'px', left: scale * (1350 - 600 / 2) + 'px', borderRadius: '10' }}
+            ref={mcVideoRef}
+            src={videoId ? `https://work247.vn/dowload/video_new/new_${videoId}/video_${videoId}.mp4` : 'mc.mp4'}
+          ></video>
         )}
       </div>
 
@@ -116,6 +120,5 @@ function App() {
 }
 
 export default App;
-
 
 
