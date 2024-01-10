@@ -10,7 +10,7 @@ function App() {
   const [imgdefault, setImgDefault] = useState(true);
   const [scale, setScale] = useState(1)
   const [width, setWidth] = useState(1920)
-  const [height, setHeight] = useState(1080)
+  // const [height, setHeight] = useState(1080)
   const [pauseBg, setPauseBg] = useState(false);
   const [videoId, setVideoId] = useState(null);
   const mcVideoRef = useRef(null);
@@ -27,6 +27,7 @@ function App() {
     if (idWidth) {
       setWidth(parseFloat(idWidth))
     }
+    
   }, []);
   useEffect(() => {
     const handleUserInteraction = () => {
@@ -67,21 +68,25 @@ function App() {
 
   useEffect(() => {
     setScale(width / 1920)
-    setHeight(width / 1920 * 1080)
+    // setHeight(width / 1920 * 1080)
   }, [imgdefault, width]);
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setImgDefault(false);
+      backgroundVideoRef.current.play()
+    }, 1000);
 
+    return () => clearTimeout(timeoutId);
+  }, []);
   return (
     <div className="App" style={{ position: 'relative', width: 'fit-content', margin: 'auto' }}>
-      {imgdefault ? <div onClick={() => {
-        setImgDefault(false)
-      }} className='image-default' style={{ width: width + 'px', height: height + 'px' }}></div> : <></>}
-
       <audio ref={audioRef} src="background_music.mp3" />
-      <div className="container" style={{ display: imgdefault ? 'none' : 'block' }}>
+      <div className="container">
         <video
           className="background"
           preload="auto"
           autoPlay
+          muted
           onTimeUpdate={() => {
             const currentTime = backgroundVideoRef.current.currentTime;
             if (currentTime >= 6 && !showMcVideo) {
