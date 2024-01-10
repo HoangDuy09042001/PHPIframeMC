@@ -80,7 +80,13 @@ function App() {
             }}
           >
 
-            <div style={{ backgroundImage: "url('watchnow.png')", width: 450*scale + "px", height: 167*scale + "px", backgroundSize: 'cover' }}></div>
+            <div style={{
+              backgroundImage: "url('watchnow.gif')",
+              width: 450 * scale + "px",
+              height: 167 * scale + "px",
+              backgroundSize: 'cover',
+              cursor: 'pointer'
+            }}></div>
           </div>
         </div>
         : <></>}
